@@ -1,4 +1,4 @@
-/* ====== General ====== */
+/* ====== Vista Principal====== */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -64,4 +64,91 @@ body {
 
 .btn-green {
   background: #80c904; /* verde */
+}
+/* ====== Formularios (Ejercicio 1 y 2) ====== */
+h1, p {
+  text-align: center;
+  margin-bottom: 12px;
+  color: #222;
+}
+
+form {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+label {
+  display: block;
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+/* Todos los inputs de texto, número y contraseña tendrán el mismo estilo */
+input[type="text"],
+input[type="number"], input[type="password"] {
+  padding:12px 14px;
+  border:1px solid #d8dbe2;
+  border-radius:8px;
+  font-size:15px;
+  outline:none;
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+input:focus {
+  border-color:#7c3aed;
+  box-shadow:0 0 0 3px rgba(124,58,237,.12);
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.btn-primary {
+  background: #0d6efd;
+  color: #fff;
+  border: 0;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.15s, filter 0.2s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* ====== Resumen (texto plano) ====== */
+.result {
+  margin-top: 20px;
+}
+
+.result h2,
+.result p {
+  text-align: left;
+  margin: 6px 0;
+  font-weight: normal;
+  color: #000;
+}
+
+/* ====== Enlace de volver ====== */
+.back {
+  display: block;
+  text-align: center;
+  margin-top: 16px;
+  color: #0d6efd;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.back:hover {
+  text-decoration: underline;
 }

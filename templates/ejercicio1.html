@@ -1,10 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="utf-8" />
+  <title>Cálculo de compras</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
 </head>
 <body>
+  <div class="card">
+    <h1>Cálculo de compras</h1>
+    <p>Valor unitario del tarro: <strong>{{ precio_unitario|clp }}</strong></p>
 
+    {% if errores %}
+      <div class="alert">
+        <ul style="margin:0; padding-left:18px;">
+          {% for e in errores %}<li>{{ e }}</li>{% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('ejercicio1') }}">
+      <div class="row">
+        <label for="nombre">Ingresa tu nombre</label>
+        <input id="nombre" name="nombre" type="text" required value="{{ request.form.nombre or '' }}">
+      </div>
+
+      <div class="row">
+        <label for="edad">Ingresa tu edad</label>
+        <input id="edad" name="edad" type="number" min="0" required value="{{ request.form.edad or '' }}">
+      </div>
+
+      <div class="row">
+        <label for="cantidad">Ingresa la cantidad de tarros de pintura a comprar</label>
+        <input id="cantidad" name="cantidad" type="number" min="1" required value="{{ request.form.cantidad or '' }}">
+      </div>
+
+      <div class="actions">
+        <button class="btn-primary" type="submit">Calcular</button>
+      </div>
+    </form>
+
+    {% if resultado %}
+      <div class="result">
+        <h2>Resumen</h2>
+        <p><strong>Cliente:</strong> {{ resultado.nombre }}</p>
+        <div class="grid">
+          <div class="cell">
+            <div class="muted">Total sin descuento</div>
+            <div><strong>{{ resultado.total_sin_desc|clp }}</strong></div>
+          </div>
+          <div class="cell">
+            <div class="muted">
+              {% if resultado.descuento_pct > 0 %}
+                Descuento ({{ resultado.descuento_pct }}%)
+              {% else %}
+                Descuento
+              {% endif %}
+            </div>
+            <div><strong>{{ resultado.descuento|clp }}</strong></div>
+          </div>
+          <div class="cell" style="grid-column: 1 / -1;">
+            <div class="muted">Total a pagar</div>
+            <div style="font-size:20px;"><strong>{{ resultado.total_con_desc|clp }}</strong></div>
+          </div>
+        </div>
+        <p class="muted" style="margin-top:10px;">
+          (Edad: {{ resultado.edad }} · Cantidad: {{ resultado.cantidad }})
+        </p>
+      </div>
+    {% endif %}
+
+    <a href="{{ url_for('home') }}" class="back">⟵ Volver al inicio</a>
+  </div>
 </body>
 </html>

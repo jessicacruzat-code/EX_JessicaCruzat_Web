@@ -67,29 +67,10 @@ def ejercicio1():
                            resultado=resultado,
                            errores=errores,
                            precio_unitario=precio_unitario)
-
-@app.route("/ejercicio2", methods=["GET", "POST"], endpoint="ejercicio2")
+@app.route("/ejercicio2", endpoint="ejercicio2")
 def ejercicio2():
-    mensaje = None
-    estado = None  # "ok" o "error" para el estilo del mensaje
+    return render_template("ejercicio2.html")
 
-    if request.method == "POST":
-        usuario = (request.form.get("usuario") or "").strip().lower()
-        password = request.form.get("password") or ""
-
-        credenciales = {"juan": "admin", "pepe": "user"}
-
-        if usuario in credenciales and password == credenciales[usuario]:
-            if usuario == "juan":
-                mensaje = "Bienvenido administrador juan"
-            else:  # usuario == "pepe"
-                mensaje = "Bienvenido usuario pepe"
-            estado = "ok"
-        else:
-            mensaje = "Usuario o contraseña incorrectos"
-            estado = "error"
-
-    return render_template("ejercicio2.html", mensaje=mensaje, estado=estado)
 
 if __name__ == "__main__":
     # Desactiva el reloader para evitar dobles registros mientras debuggeas
