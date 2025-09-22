@@ -6,6 +6,30 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
 </head>
 <body>
+  <div class="card">
+    <h1>Inicio de sesión</h1>
 
+    <form method="post" action="{{ url_for('ejercicio2') }}">
+      <div class="row">
+        <label for="usuario">Ingresa tu nombre</label>
+        <input id="usuario" name="usuario" type="text" required value="{{ request.form.usuario or '' }}">
+      </div>
+
+      <div class="row">
+        <label for="password">Ingresa tu contraseña</label>
+        <input id="password" name="password" type="password" required>
+      </div>
+
+      <div class="actions">
+        <button class="btn-primary" type="submit">Verificar</button>
+      </div>
+    </form>
+
+    {% if mensaje %}
+      <p class="msg {{ 'msg-ok' if estado == 'ok' else 'msg-error' }}">{{ mensaje }}</p>
+    {% endif %}
+
+    <a href="{{ url_for('home') }}" class="back">⟵ Volver al inicio</a>
+  </div>
 </body>
 </html>
